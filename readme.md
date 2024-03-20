@@ -30,11 +30,38 @@
 </p>
 
 ## Introduction
+
 Spotify for Laravel makes working with the Spotify Web API a breeze. It provides straight forward methods for each endpoint and a fluent interface for optional parameters.
 
 The package supports all Spotify Web API endpoints that are accessible with the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow).
 
+## Fork from aerni/laravel-spotify
+
+This repository was forked from aerni/laravel-spotify in order to work with Laravel 11.X.
+
+You can use this package here as a VCS repository to override the aerni/laravel-spotify package.
+
+Include the aerni/laravel-spotify as usual in your composer.json:
+
+```json
+"require": {
+        "aerni/laravel-spotify": "^1.0",
+}
+```
+
+And additionally, add this repository as VCS repository to your composer.json:
+
+```json
+"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Dyncep/laravel-spotify"
+        }
+    ],
+```
+
 ## Installation
+
 Install the package using Composer. The package will automatically register itself.
 
 ```bash
@@ -93,6 +120,7 @@ SPOTIFY_CLIENT_SECRET=********************************
 ```
 
 ## Usage Example
+
 Import the package at the top of your file. All of the following examples use the [Facade](https://laravel.com/docs/master/facades).
 
 ```php
@@ -108,6 +136,7 @@ Spotify::searchTracks('Closed on Sunday')->get();
 **Important:** The `get()` method acts as the final method of the fluent interface. Make sure to always call it last in the method chain to execute a request to the Spotify Web API.
 
 ## Optional Parameters
+
 You may pass optional parameters to your requests using the fluent interface provided by this package. A common use case is to set a `limit` and `offset` to your request.
 
 ```php
@@ -115,6 +144,7 @@ Spotify::searchTracks('Closed on Sunday')->limit(50)->offset(50)->get();
 ```
 
 ### Parameter Methods API Reference
+
 Consult the [Spotify Web API Reference Documentation](https://developer.spotify.com/documentation/web-api/reference/) to check which parameters are available to what endpoint.
 
 ```php
@@ -147,6 +177,7 @@ Spotify::featuredPlaylists()->timestamp('2020-03-02T09:00:00')->get();
 ```
 
 ### Resetting Defaults
+
 You may want to reset the default setting of `country`, `locale` or `market` for a given request. You may do so by calling the corresponding parameter method with an empty argument.
 
 ```php
@@ -155,6 +186,7 @@ Spotify::searchTracks('query')->market()->get();
 ```
 
 ### Response Key
+
 Some API responses are wrapped in a top level object like `artists` or `tracks`. If you want to directly access the content of a given top level object, you may do so by passing its key as a string to the `get()` method.
 
 ```php
@@ -175,6 +207,7 @@ Spotify::albums(['album_id', 'album_id_2', 'album_id_3'])->get();
 ```
 
 ### Albums
+
 [Spotify Web API Reference on Albums](https://developer.spotify.com/documentation/web-api/reference/albums/)
 
 ```php
@@ -189,6 +222,7 @@ Spotify::albumTracks('album_id')->get();
 ```
 
 ### Artists
+
 [Spotify Web API Reference on Artists](https://developer.spotify.com/documentation/web-api/reference/artists/)
 
 ```php
@@ -209,6 +243,7 @@ Spotify::artistRelatedArtists('artist_id')->get();
 ```
 
 ### Browse
+
 [Spotify Web API Reference on Browse](https://developer.spotify.com/documentation/web-api/reference/browse/)
 
 ```php
@@ -235,6 +270,7 @@ Spotify::recommendations($seed)->get();
 ```
 
 ### Episodes
+
 [Spotify Web API Reference on Episodes](https://developer.spotify.com/documentation/web-api/reference/episodes/)
 
 ```php
@@ -246,6 +282,7 @@ Spotify::episodes('episode_id, episode_id_2, episode_id_3')->get();
 ```
 
 ### Playlists
+
 [Spotify Web API Reference on Playlists](https://developer.spotify.com/documentation/web-api/reference/playlists/)
 
 ```php
@@ -260,6 +297,7 @@ Spotify::playlistCoverImage('playlist_id')->get();
 ```
 
 ### Search
+
 [Spotify Web API Reference on Search](https://developer.spotify.com/documentation/web-api/reference/search/)
 
 ```php
@@ -286,6 +324,7 @@ Spotify::searchTracks('query')->get();
 ```
 
 ### Shows
+
 [Spotify Web API Reference on Shows](https://developer.spotify.com/documentation/web-api/reference/shows/)
 
 ```php
@@ -300,6 +339,7 @@ Spotify::showEpisodes('show_id')->get();
 ```
 
 ### Tracks
+
 [Spotify Web API Reference on Tracks](https://developer.spotify.com/documentation/web-api/reference/tracks/)
 
 ```php
@@ -320,6 +360,7 @@ Spotify::audioFeaturesForTracks('track_id, track_id_2, track_id_3')->get();
 ```
 
 ### User's Profile
+
 [Spotify Web API Reference on User's Profile](https://developer.spotify.com/documentation/web-api/reference/users-profile/)
 
 ```php
@@ -331,9 +372,11 @@ Spotify::userPlaylists('user_id')->get();
 ```
 
 ## Recommendations
+
 You can get personalized tracks using the [recommendations endpoint](https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations) by seeding artists, genres and tracks along with a bunch of adjustable properties such as energy, key and danceability.
 
 ### Usage Example
+
 Import the `SpotifySeed` class. All of the following examples use the [Facade](https://laravel.com/docs/master/facades).
 
 ```php
@@ -356,6 +399,7 @@ Spotify::recommendations($seed)->get();
 ```
 
 ### SpotifySeed API Reference
+
 **Note:** Any parameter that accepts multiple values can either receive a string with comma-separated values or an array of values.
 
 **Add artists, genres and tracks to your seed:**
@@ -436,6 +480,7 @@ SpotifySeed::setTargetValence(float $target);
 ```
 
 ## Tests
+
 Run the tests like this:
 
 ```bash
